@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const Container = styled.nav`
@@ -7,11 +8,16 @@ export const Navbar = () => {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: #151515;
     color: whitesmoke;
+    box-shadow: 0px 2px 2px #000;
     h2 {
       font-size: 32px;
       margin: 0;
+    }
+    h2:visited{
+      text-decoration: none;
+      color: whitesmoke;
     }
     button {
       border: none;
@@ -26,13 +32,22 @@ export const Navbar = () => {
       text-decoration: underline;
     }
   `;
+
   return (
     <Container>
-      <h2>Guitar-Mart</h2>
+      <Link to="/" style={{textDecoration: 'none', color: 'whitesmoke'}}>
+        <h2>Guitar-Mart</h2>
+      </Link>
       <nav>
-        <button>Home</button>
-        <button>Shop</button>
-        <button>Cart</button>
+        <Link to="/">
+          <button>Home</button>
+        </Link>
+        <Link to="/shop">
+          <button>Shop</button>
+        </Link>
+        <Link to="/cart">
+          <button>Cart</button>
+        </Link>
       </nav>
     </Container>
   );

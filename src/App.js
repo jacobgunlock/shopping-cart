@@ -1,11 +1,15 @@
-import { Home } from "./components/Home";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home } from "./components/pages/Home";
+import { Shop } from './components/pages/Shop';
 
 function App() {
   return (
-    <div style={{margin: '0', padding: '0'}}>
-      <Home />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
