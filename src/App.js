@@ -1,8 +1,10 @@
+import { Home } from "./components/Home";
+
 
 function App() {
   return (
-    <div className="App">
-      
+    <div style={{margin: '0', padding: '0'}}>
+      <Home />
     </div>
   );
 }
