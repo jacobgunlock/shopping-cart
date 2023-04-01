@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 
 export const Card = (props) => {
-  const { img, name, price } = props.item;
+  const { img, name, price, type } = props.item;
 
   const Container = styled.div`
     border: solid black;
@@ -18,7 +18,8 @@ export const Card = (props) => {
     <Container>
       <img src={img} alt="" style={{width: '200px'}}/>
       <h2>{name}</h2>
-      <p>{price}</p>
+      <p>${price}</p>
+      <p>{type}</p>
       <button>Add to Cart</button>
     </Container>
   )
