@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Navbar = () => {
   const Container = styled.nav`
     display: flex;
     justify-content: space-between;
@@ -15,7 +14,7 @@ export const Navbar = () => {
       font-size: 32px;
       margin: 0;
     }
-    h2:visited{
+    a:visited {
       text-decoration: none;
       color: whitesmoke;
     }
@@ -32,6 +31,7 @@ export const Navbar = () => {
       text-decoration: underline;
     }
   `;
+export const Navbar = ({cartLength}) => {
 
   return (
     <Container>
@@ -46,7 +46,7 @@ export const Navbar = () => {
           <button>Shop</button>
         </Link>
         <Link to="/cart">
-          <button>Cart</button>
+          <button name="cart">Cart {cartLength}</button>
         </Link>
       </nav>
     </Container>

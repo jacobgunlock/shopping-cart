@@ -4,7 +4,6 @@ import { Navbar } from "../Navbar";
 import background from "../../assets/homepage.jpg";
 import styled from "styled-components";
 
-export const Home = () => {
   const Container = styled.div`
     background-image: url(${background});
     background-size: cover;
@@ -31,10 +30,11 @@ export const Home = () => {
       cursor: pointer;
     }
   `;
+export const Home = (props) => {
 
   return (
     <Container>
-      <Navbar />
+      <Navbar cartLength={props.cartLength}/>
       <Main>
         <h1>The #1 Guitar Marketplace</h1>
         <p>Home of the highest quality acoustic, electric, and bass guitars</p>

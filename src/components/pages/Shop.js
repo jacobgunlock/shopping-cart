@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Navbar } from "../Navbar";
+import { Card } from "../Card";
 import guitars from "../products/guitars";
 import basses from "../products/basses";
-import { Card } from "../Card";
 import styled from "styled-components";
 const Cards = styled.div`
   display: grid;
@@ -27,15 +27,17 @@ const Filter = styled.div`
   }
 `;
 
-export const Shop = () => {
-  const filterProducts = (products, currentFilter) => {
+
+export const Shop = (props) => {
+  function filterProducts(products, currentFilter) {
     if (currentFilter === "All") return products;
     return products.filter((item) => item.type === currentFilter);
   };
-  const handleCategoryChange = (type) => {
+  function handleCategoryChange(type){
     setCategory(type);
     setCurrentFilter("All");
   };
+
   const [category, setCategory] = useState("guitars");
   const [currentFilter, setCurrentFilter] = useState("All");
   const productType = category === "guitars" ? guitars : basses;
@@ -44,13 +46,17 @@ export const Shop = () => {
     guitars: ["Acoustic", "Electric"],
     basses: ["4 String", "5 String"],
   };
-  
+
   return (
     <>
-      <Navbar />
+      <Navbar cartLength={props.cartLength}/>
       <CategoryStyled>
-        <button onClick={() => handleCategoryChange("guitars")}>Guitars</button>
-        <button onClick={() => handleCategoryChange("basses")}>Basses</button>
+        <button key={"guitars"} onClick={() => handleCategoryChange("guitars")}>
+          Guitars
+        </button>
+        <button key={"basses"} onClick={() => handleCategoryChange("basses")}>
+          Basses
+        </button>
       </CategoryStyled>
 
       <Filter>
@@ -60,7 +66,9 @@ export const Shop = () => {
           value={currentFilter}
           onChange={(e) => setCurrentFilter(e.target.value)}
         >
-          <option value="All">All</option>
+          <option key={"All"} value="All">
+            All
+          </option>
           {filters[category].map((filter) => {
             return (
               <option key={filter} value={filter}>
@@ -73,7 +81,7 @@ export const Shop = () => {
 
       <Cards>
         {filteredProducts.map((item) => (
-          <Card key={item.id} item={item} />
+          <Card key={item.name} item={item} addCartItem={props.addCartItem}/>
         ))}
       </Cards>
     </>
