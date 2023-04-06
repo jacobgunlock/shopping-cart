@@ -34,7 +34,7 @@ export const Home = (props) => {
 
   return (
     <Container>
-      <Navbar cartLength={props.cartLength}/>
+      <Navbar cartCount={props.cartCount}/>
       <Main>
         <h1>The #1 Guitar Marketplace</h1>
         <p>Home of the highest quality acoustic, electric, and bass guitars</p>

@@ -27,16 +27,15 @@ const Filter = styled.div`
   }
 `;
 
-
 export const Shop = (props) => {
   function filterProducts(products, currentFilter) {
     if (currentFilter === "All") return products;
     return products.filter((item) => item.type === currentFilter);
-  };
-  function handleCategoryChange(type){
+  }
+  function handleCategoryChange(type) {
     setCategory(type);
     setCurrentFilter("All");
-  };
+  }
 
   const [category, setCategory] = useState("guitars");
   const [currentFilter, setCurrentFilter] = useState("All");
@@ -49,7 +48,7 @@ export const Shop = (props) => {
 
   return (
     <>
-      <Navbar cartLength={props.cartLength}/>
+      <Navbar cartCount={props.cartCount} />
       <CategoryStyled>
         <button key={"guitars"} onClick={() => handleCategoryChange("guitars")}>
           Guitars
@@ -81,7 +80,13 @@ export const Shop = (props) => {
 
       <Cards>
         {filteredProducts.map((item) => (
-          <Card key={item.name} item={item} addCartItem={props.addCartItem}/>
+          <Card
+            key={item.name}
+            item={item}
+            addCartItem={props.addCartItem}
+            cartCount={props.cartCount}
+            setCartCount={props.setCartCount}
+          />
         ))}
       </Cards>
     </>

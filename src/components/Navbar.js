@@ -31,7 +31,7 @@ import { Link } from "react-router-dom";
       text-decoration: underline;
     }
   `;
-export const Navbar = ({cartLength}) => {
+export const Navbar = ({cartCount}) => {
 
   return (
     <Container>
@@ -46,7 +46,7 @@ export const Navbar = ({cartLength}) => {
           <button>Shop</button>
         </Link>
         <Link to="/cart">
-          <button name="cart">Cart {cartLength}</button>
+          <button name="cart">Cart {cartCount}</button>
         </Link>
       </nav>
     </Container>
