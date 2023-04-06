@@ -11,30 +11,38 @@ const Cards = styled.div`
 const CategoryStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 10px;
-  gap: 20px;
 
   button {
-    font-size: 48px;
-    padding: 20px 0;
+    font-size: 36px;
+    padding: 10px 0;
+    &.active {
+      border: solid red;
+    }
   }
 `;
 const Filter = styled.div`
-  display: flex;
-  justify-content: center;
-  * {
-    margin: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  button {
+    font-size: 28px;
+    padding: 10px;
+    &.active {
+      border: solid red;
+    }
   }
 `;
 
-export const Shop = (props) => {
+export const Shop = ({ cartCount, addCartItem, setCartCount }) => {
   function filterProducts(products, currentFilter) {
     if (currentFilter === "All") return products;
     return products.filter((item) => item.type === currentFilter);
   }
-  function handleCategoryChange(type) {
+  function handleClick(type, e) {
     setCategory(type);
     setCurrentFilter("All");
+  }
+  function changeFilter(filter) {
+    setCurrentFilter(filter);
   }
 
   const [category, setCategory] = useState("guitars");
@@ -48,44 +56,53 @@ export const Shop = (props) => {
 
   return (
     <>
-      <Navbar cartCount={props.cartCount} />
+      <Navbar cartCount={cartCount} />
       <CategoryStyled>
-        <button key={"guitars"} onClick={() => handleCategoryChange("guitars")}>
+        <button
+          className={category === "guitars" ? "active" : ""}
+          category={category}
+          key={"guitars"}
+          onClick={(e) => handleClick("guitars", e)}
+        >
           Guitars
         </button>
-        <button key={"basses"} onClick={() => handleCategoryChange("basses")}>
+        <button
+          className={category === "basses" ? "active" : ""}
+          category={category}
+          key={"basses"}
+          onClick={(e) => handleClick("basses", e)}
+        >
           Basses
         </button>
       </CategoryStyled>
-
       <Filter>
-        <label htmlFor="type">Filter</label>
-        <select
-          name="type"
-          value={currentFilter}
-          onChange={(e) => setCurrentFilter(e.target.value)}
+        <button
+          key={"All"}
+          className={currentFilter === "All" ? "active" : ""}
+          onClick={() => changeFilter("All")}
         >
-          <option key={"All"} value="All">
-            All
-          </option>
-          {filters[category].map((filter) => {
-            return (
-              <option key={filter} value={filter}>
-                {filter}
-              </option>
-            );
-          })}
-        </select>
+          All
+        </button>
+        {filters[category].map((filter) => {
+          return (
+            <button
+              key={filter}
+              className={currentFilter === filter ? "active" : ""}
+              onClick={() => changeFilter(filter)}
+            >
+              {filter}
+            </button>
+          );
+        })}
       </Filter>
-
       <Cards>
         {filteredProducts.map((item) => (
           <Card
             key={item.name}
             item={item}
-            addCartItem={props.addCartItem}
-            cartCount={props.cartCount}
-            setCartCount={props.setCartCount}
+            addCartItem={addCartItem}
+            cartCount={cartCount}
+            setCartCount={setCartCount}
           />
         ))}
       </Cards>

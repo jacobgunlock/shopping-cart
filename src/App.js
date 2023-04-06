@@ -7,7 +7,6 @@ import { Cart } from "./components/pages/Cart";
 function App() {
   const [cart, setCart] = useState([]);
   const [cartCount, setCartCount] = useState(0);
-
   function addCartItem(item) {
     item.quantity = 1;
     setCart([...cart, item]);
@@ -17,18 +16,19 @@ function App() {
     setCart(newCart);
   }
   function changeQty(item, operator) {
-    if (item.quantity === 1 && operator === '-') return deleteCartItem(item)
-    setCart(cart.map(el => {
-      if (el.name === item.name) {
-        operator === '+'
-        ? el.quantity += 1
-        : el.quantity -= 1        
+    if (item.quantity === 1 && operator === "-") return deleteCartItem(item);
+    setCart(
+      cart.map((el) => {
+        if (el.name === item.name) {
+          operator === "+" ? (el.quantity += 1) : (el.quantity -= 1);
+          return el;
+        }
         return el;
-      } return el;
-    }))
+      })
+    );
   }
   useEffect(() => {
-    setCartCount(cart.reduce((sum, item) => sum + item.quantity, 0));
+    setCartCount(cart.reduce((acc, item) => acc + item.quantity, 0));
   }, [cart]);
 
   return (

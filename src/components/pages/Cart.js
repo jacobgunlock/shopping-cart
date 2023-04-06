@@ -12,6 +12,7 @@ export const Cart = (props) => {
       {cart.length === 0 ? <p>Shopping Cart is Empty</p> : <></>}
       {cart.map((item) => (
         <CartItem
+          key={item.name}
           cart={cart}
           cartCount={cartCount}
           setCartCount={setCartCount}
